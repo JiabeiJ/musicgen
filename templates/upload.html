@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seed Selection</title>
+</head>
+<body>
+<form action="{{url_for('Submit')}}" method="post">
+<select name= select_seed_MIDI class="Input">
+    {% for midi in select_seed_MIDI %}
+    <option value= "{{select_seed_MIDI}}" SELECTED>{{select_seed_MIDI}}</option>"
+    {% endfor %}
+</select>
+</body>
+
+<body>
+<h1>{{score}}</h1>
+</body>
+
+</html>

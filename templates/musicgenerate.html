@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Transemusé</title>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+}
+
+
+        .container {
+    display: flex;}
+
+     .file-upload {
+    border: 2px solid white;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    width: 180px;
+    height: 30px;
+    margin-bottom: 15px;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    position: absolute; /* Position absolutely */
+    top: 40px; /* Align with the top of the sidebar */
+    left: 80px; /* Adjust the right spacing as needed */
+    background-color: transparent;
+         transition: background-color 0.1s, color 0.1s;
+         font-size: inherit;
+}
+     input[type="file"] {
+    display: none;
+}
+
+     .file-upload:hover {background-color:  navajowhite; color: black; }
+
+
+
+}
+    /* Center the h1 element */
+    h1.transmuse {
+            text-align: center;
+            position: relative; /* Add this line */
+            z-index: 1; /* Add this line */
+            color: black;
+            font-size: 60px;
+            #font-family: "Times New Roman", Times, serif;
+        }
+    .button-container input[type="submit"] {
+    height: 30px;
+        width: 180px;
+        background-color: transparent;
+        border: 2px solid white; /* Set border to white */
+        border-radius: 5px;
+        color: white;
+        font-size: inherit;
+        transition: background-color 0.1s, color 0.1s;
+}
+    .button-container input[type="submit"]:hover {
+    background-color:navajowhite;
+        color: black;/* Darker background color on hover */
+}
+    .button-container {
+        display: flex;
+        justify-content: center; /* Center items horizontally */
+        margin-bottom: 10px;
+}
+    .button-container input[type="submit"] :hover {
+    background-color:  #696969; /* Darkened background color on hover */
+}
+
+
+    .download1 {height: 30px;
+                border: none; /* Remove border */
+                background-color: transparent; /* Remove background color */
+                padding: 0; /* Remove padding */
+                font-size: inherit; /* Inherit font size */
+                color: white;
+                display: flex; /* Use flexbox */
+                align-items: center; /}
+    .download1:hover {
+    color: navajowhite; /* Change color when hovering */
+}
+    .download2 {height: 30px;
+                border: none; /* Remove border */
+                background-color: transparent; /* Remove background color */
+                padding: 0; /* Remove padding */
+                font-size: inherit; /* Inherit font size */
+                color: white;
+                display: flex; /* Use flexbox */
+                align-items: center;}
+    .download2:hover {
+    color: navajowhite; }
+
+    .download3 { height: 30px;
+                border: none; /* Remove border */
+                background-color: transparent; /* Remove background color */
+                padding: 0; /* Remove padding */
+                font-size: inherit; /* Inherit font size */
+                color: white;
+                display: flex; /* Use flexbox */
+                align-items: center;}
+        .download3:hover {
+    color: navajowhite; }
+
+    .download4 { height: 30px;
+                border: none; /* Remove border */
+                background-color: transparent; /* Remove background color */
+                padding: 0; /* Remove padding */
+                font-size: inherit; /* Inherit font size */
+                color: white;
+                display: flex; /* Use flexbox */
+                align-items: center;}
+        .download4:hover {
+    color: navajowhite; }
+
+    .back-vedio{
+        position: absolute;
+        right:0;
+        bottom:0;
+        z-index: -1;
+    }
+
+        midi-visualizer.visualizer {
+                      background: transparent;
+                      border-top: none;
+                      border-radius: 0 0 10px 10px;
+                      margin: 0;
+                      margin-top: 0;
+                      overflow: auto;
+
+                    }
+       .sidebar {
+                width: 300px; /* Width of the sidebar */
+                height: 100vh;
+                background-color: #696969; /* Background color of the sidebar */
+                padding: 80px 20px 20px;
+                display: flex; /* Set display to flex */
+                flex-direction: column; /* Stack items vertically */
+
+                align-items: center; /* Center items horizontally */
+            }
+
+         .display-section {
+            flex: 1; /* Take remaining space */
+            padding: 20px;
+             overflow-x: auto; /* Enable horizontal scrolling */
+             max-width: calc(100% - 40px);
+             background-color: navajowhite;
+        }
+         .midi_player_1 {
+    margin-bottom: 40px; /* Adjust the margin as needed */
+}
+
+
+    </style>
+</head>
+
+
+
+<body>
+
+    <title>Transemusé</title>
+
+
+    <div class="container">
+
+
+    <form method=post enctype=multipart/form-data>
+
+            <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
+           <button type="button" class="file-upload" onclick="document.getElementById('midiFiled').click()">
+           Upload Midi
+           </button>
+            <input class="select_file" type="file" value="select" id="midiFiled" name="file" accept="audio/midi, audio/x-midi" onchange="loadMidiFiled()" />
+
+
+
+
+    <script>
+        function loadMidiFiled() {
+            // Get the selected file
+            const input = document.getElementById('midiFiled');
+            const file = input.files[0];
+
+            if (file) {
+                // Create a URL for the selected file
+                const objectURL = URL.createObjectURL(file);
+
+                // Set the src attribute of the midi-player to the URL of the selected file
+                const player = document.getElementById('midiPlayerd');
+                player.setAttribute('src', objectURL);
+                console.log('Generated URL for the uploaded file:', objectURL);
+
+                // Play the MIDI file
+                player.play();
+            }
+        }
+    </script>
+            <div class="sidebar">
+        <midi-player class="midi_player_1" id="midiPlayerd" sound-font visualizer="#piano-roll-visualizer"></midi-player>
+
+    <div class="button-container">
+        <!-- Your other form elements -->
+        <input  type="submit" value="Generate">
+    </div>
+    </form>
+
+
+
+
+    <midi-player src="http://127.0.0.1:5000/files/Allegro-Music-Transformer-Music-Composition_0.mid" class="midi_player" id="midiPlayer_2" sound-font visualizer="#piano-roll-visualizer"></midi-player>
+    <button class="download1" onclick="window.location.href='{{ url_for('serve_file', filename='Allegro-Music-Transformer-Music-Composition_0.mid') }}'">Download Composition 1</button>
+
+    <midi-player src="http://127.0.0.1:5000/files/Allegro-Music-Transformer-Music-Composition_1.mid" class="midi_player" id="midiPlayer_3" sound-font visualizer="#piano-roll-visualizer"></midi-player>
+    <button class="download2" onclick="window.location.href='{{ url_for('serve_file', filename='Allegro-Music-Transformer-Music-Composition_1.mid') }}'">Download Composition 2</button>
+
+    <midi-player src="http://127.0.0.1:5000/files/Allegro-Music-Transformer-Music-Composition_2.mid" class="midi_player" id="midiPlayer_4" sound-font visualizer="#piano-roll-visualizer"></midi-player>
+    <button class="download3" onclick="window.location.href='{{ url_for('serve_file', filename='Allegro-Music-Transformer-Music-Composition_2.mid') }}'">Download Composition 3</button>
+
+    <midi-player src="http://127.0.0.1:5000/files/Allegro-Music-Transformer-Music-Composition_3.mid" class="midi_player" id="midiPlayer_5" sound-font visualizer="#piano-roll-visualizer"></midi-player>
+        <button class="download4" onclick="window.location.href='{{ url_for('serve_file', filename='Allegro-Music-Transformer-Music-Composition_3.mid') }}'">Download Composition 4</button>
+    </div>
+
+    <div class="display-section">
+    <midi-visualizer class="visualizer" type="piano-roll" id="piano-roll-visualizer" visualizer="#section3 midi-visualizer"></midi-visualizer>
+        <midi-visualizer class="visualizer" type="staff" id="piano-roll-visualizer" visualizer="#section3 midi-visualizer"></midi-visualizer>
+    <midi-visualizer class="visualizer" type="piano-roll" id="piano-roll-visualizer_2" visualizer="#section3 midi-visualizer"></midi-visualizer>
+    <midi-visualizer class="visualizer" type="piano-roll" id="piano-roll-visualizer_2" visualizer="#section3 midi-visualizer"></midi-visualizer>
+    <midi-visualizer class="visualizer" type="piano-roll" id="piano-roll-visualizer_2" visualizer="#section3 midi-visualizer"></midi-visualizer>
+    <midi-visualizer class="visualizer" type="piano-roll" id="piano-roll-visualizer_2" visualizer="#section3 midi-visualizer"></midi-visualizer>
+    </div>
+
+    </div>
+
+
+</body>
+</html>
