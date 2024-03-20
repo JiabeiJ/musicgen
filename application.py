@@ -44,13 +44,13 @@ model_precision = "float16"
 print(full_path_to_model_checkpoint)
 import TMIDIX
 # Create Flask app
-app = Flask(__name__)
-app.secret_key = 'jjb'
+application = Flask(__name__)
+application.secret_key = 'jjb'
 model,_=instantiate(full_path_to_model_checkpoint, model_precision)
 # select_seed_MIDI = "Upload your own custom MIDI"
 # Define a route
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/compose', methods=['GET', 'POST'])
+@application.route('/', methods=['GET', 'POST'])
+@application.route('/compose', methods=['GET', 'POST'])
 def compose_1():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -139,16 +139,16 @@ def compose_1():
     return render_template("musicgenerate.html")
 
 LOCAL_FILE_DIRECTORY = '/Users/jiabei/Desktop/music_test/Allegro-Music-Transformer'
-@app.route('/files/<path:filename>')
+@application.route('/files/<path:filename>')
 def serve_file(filename):
     return send_from_directory(LOCAL_FILE_DIRECTORY, filename)
 
-@app.route('/process_selection', methods=['GET', 'POST'])
+@application.route('/process_selection', methods=['GET', 'POST'])
 def process_selection():
     select_seed_MIDI = "Upload your own custom MIDI"
     score,f = load_seed_MIDI(select_seed_MIDI)
     return score,f
-@app.route('/seed', methods=['GET', 'POST'])
+@application.route('/seed', methods=['GET', 'POST'])
 def seed_compo():
     number_of_prime_tokens = 300
     song_f,_ = melody(number_of_prime_tokens)
@@ -176,7 +176,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 import TMIDIX
 
-@app.route('/generate_midi')
+@application.route('/generate_midi')
 def generate_midi():
     # Code to generate MIDI file
     midi_file_path = '/Users/jiabei/Desktop/music_test/Allegro-Music-Transformer/templates/Allegro-Music-Transformer-Music-Composition_1.mid'
